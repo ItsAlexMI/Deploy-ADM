@@ -1,0 +1,322 @@
+---
+title: "Constantes, Operadores y Estructuras en Ensamblador x86 (Sintaxis NASM/Linux)"
+description: "Constantes, operadores, tipos de datos, instrucciones, E/S, procedimientos y macros en ensamblador x86 adaptados a NASM y syscalls Linux."
+---
+
+# ⚙️ Constantes, Operadores y Estructuras en Ensamblador x86
+
+## 1. Constantes en Ensamblador x86
+
+Las constantes son valores fijos que no cambian durante la ejecución del programa. Mejoran la legibilidad y el mantenimiento del código.
+
+
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Tipo</TableHead>
+      <TableHead>Notación / Directiva</TableHead>
+      <TableHead>Ejemplo</TableHead>
+      <TableHead>Descripción</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Numérica</TableCell><TableCell>Decimal</TableCell><TableCell><code>123</code></TableCell><TableCell>Valor decimal</TableCell></TableRow>
+    <TableRow><TableCell>Numérica</TableCell><TableCell>Hexadecimal</TableCell><TableCell><code>0xFF</code> o <code>0FFh</code></TableCell><TableCell>Valor hexadecimal</TableCell></TableRow>
+    <TableRow><TableCell>Numérica</TableCell><TableCell>Binaria</TableCell><TableCell><code>1010b</code></TableCell><TableCell>Valor binario</TableCell></TableRow>
+    <TableRow><TableCell>Carácter</TableCell><TableCell>'A'</TableCell><TableCell><code>'A'</code></TableCell><TableCell>Carácter ASCII (1 byte)</TableCell></TableRow>
+    <TableRow><TableCell>Cadena</TableCell><TableCell>"Texto"</TableCell><TableCell><code>"Hola"</code></TableCell><TableCell>Cadena de caracteres (termina en <code>0</code>)</TableCell></TableRow>
+    <TableRow><TableCell>Simbólica</TableCell><TableCell>EQU</TableCell><TableCell><code>PI EQU 3.1416</code></TableCell><TableCell>Constante simbólica definida por el usuario</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Ejemplo:**
+```asm
+section .data
+    valor   db 10         ; Byte constante = 10
+    mensaje db "Hola", 0  ; Cadena constante terminada en 0
+section .text
+    global _start
+_start:
+    mov al, [valor]       ; Carga 10 en AL
+    ; código...
+```
+
+
+
+
+## 2. Operadores en Ensamblador
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Operador</TableHead>
+      <TableHead>Ejemplo</TableHead>
+      <TableHead>Uso</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>+</TableCell><TableCell><code>add eax, 5</code></TableCell><TableCell>Suma</TableCell></TableRow>
+    <TableRow><TableCell>-</TableCell><TableCell><code>sub eax, 2</code></TableCell><TableCell>Resta</TableCell></TableRow>
+    <TableRow><TableCell>*</TableCell><TableCell><code>imul ebx</code></TableCell><TableCell>Multiplicación</TableCell></TableRow>
+    <TableRow><TableCell>/</TableCell><TableCell><code>div bl</code></TableCell><TableCell>División</TableCell></TableRow>
+    <TableRow><TableCell>and</TableCell><TableCell><code>and eax, ebx</code></TableCell><TableCell>Operación bit a bit</TableCell></TableRow>
+    <TableRow><TableCell>shl</TableCell><TableCell><code>shl eax, 1</code></TableCell><TableCell>Desplazamiento a la izquierda (x2)</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Aplicación:**
+```asm
+mov eax, 10
+imul ebx, 2          ; ebx = ebx * 2
+and al, 0Fh          ; mascara los 4 bits superiores
+```
+
+
+
+## 3. Tipos de Datos en x86
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Tipo</TableHead>
+      <TableHead>Directiva</TableHead>
+      <TableHead>Tamaño (bits)</TableHead>
+      <TableHead>Rango</TableHead>
+      <TableHead>Ejemplo</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Byte</TableCell><TableCell>db</TableCell><TableCell>8</TableCell><TableCell>0 a 255</TableCell><TableCell><code>num db 255</code></TableCell></TableRow>
+    <TableRow><TableCell>Word</TableCell><TableCell>dw</TableCell><TableCell>16</TableCell><TableCell>0 a 65,535</TableCell><TableCell><code>valor dw 1000</code></TableCell></TableRow>
+    <TableRow><TableCell>Double Word</TableCell><TableCell>dd</TableCell><TableCell>32</TableCell><TableCell>0 a 4,294,967,295</TableCell><TableCell><code>dato dd 123456</code></TableCell></TableRow>
+    <TableRow><TableCell>Cadena</TableCell><TableCell>db</TableCell><TableCell>Variable</TableCell><TableCell>ASCII</TableCell><TableCell><code>texto db "Hola", 0</code></TableCell></TableRow>
+  </TableBody>
+</Table>
+
+> **Importante:** Elegir el tipo correcto optimiza memoria y evita errores. Las cadenas terminan con `0` (Linux).
+
+
+
+## 4. Conjunto de Instrucciones x86
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Categoría</TableHead>
+      <TableHead>Instrucciones</TableHead>
+      <TableHead>Ejemplo</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Movimiento</TableCell><TableCell>mov, lea</TableCell><TableCell><code>mov eax, ebx</code></TableCell></TableRow>
+    <TableRow><TableCell>Aritméticas</TableCell><TableCell>add, sub, imul, div</TableCell><TableCell><code>add eax, 5</code></TableCell></TableRow>
+    <TableRow><TableCell>Control de Flujo</TableCell><TableCell>jmp, je, loop</TableCell><TableCell><code>je etiqueta</code></TableCell></TableRow>
+    <TableRow><TableCell>Pila</TableCell><TableCell>push, pop</TableCell><TableCell><code>push eax</code></TableCell></TableRow>
+    <TableRow><TableCell>Interrupciones</TableCell><TableCell>int 0x80 (syscall)</TableCell><TableCell><code>int 0x80</code></TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Ejemplo (Suma con salto condicional):**
+```asm
+cmp eax, ebx
+jg mayor        ; Salta si eax > ebx
+mov ecx, 0
+mayor:
+    add ecx, 1
+```
+
+
+## 5. Control de Dispositivos de E/S
+
+
+### Syscalls en Linux (int 0x80)
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Función</TableHead>
+      <TableHead>eax</TableHead>
+      <TableHead>Descripción</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Leer carácter</TableCell><TableCell>3</TableCell><TableCell>sys_read (file descriptor 0 stdin)</TableCell></TableRow>
+    <TableRow><TableCell>Escribir cadena</TableCell><TableCell>4</TableCell><TableCell>sys_write (file descriptor 1 stdout)</TableCell></TableRow>
+    <TableRow><TableCell>Terminar programa</TableCell><TableCell>1</TableCell><TableCell>sys_exit</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Ejemplo (Imprimir "Hola"):**
+```asm
+section .data
+    msg db "Hola", 0xA  ; Cadena con salto de línea
+    len equ $ - msg
+section .text
+    global _start
+_start:
+    mov eax, 4          ; sys_write
+    mov ebx, 1          ; stdout
+    mov ecx, msg
+    mov edx, len
+    int 0x80
+
+    mov eax, 1          ; sys_exit
+    mov ebx, 0
+    int 0x80
+```
+
+
+
+## 6. Procedimientos y Macros
+
+### Procedimientos (proc, call, ret)
+
+```asm
+sumar:
+    add eax, ebx
+    ret
+
+; Uso:
+call sumar
+```
+
+### Macros (NASM)
+
+```asm
+%macro MOSTRAR 1
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, %1
+    mov edx, %1_len
+    int 0x80
+%endmacro
+
+section .data
+mensaje db "Hola mundo", 0xA
+mensaje_len equ $ - mensaje
+
+section .text
+global _start
+_start:
+    MOSTRAR mensaje
+
+    mov eax, 1
+    mov ebx, 0
+    int 0x80
+```
+
+
+
+## 7. Ejemplos Prácticos
+
+### Ejemplo 1: Macro para Restar
+```asm
+section .text
+global _start
+
+%macro RESTAR 2
+    mov al, %1
+    sub al, %2
+%endmacro
+
+_start:
+    RESTAR 10, 3      ; AL = 7
+
+    ; Mostrar AL como número (decimal) en consola Linux (sys_write)
+    ; Convertir AL a ASCII (suponiendo que es un número menor que 10)
+    add al, '0'       
+    mov [resultado], al
+
+    mov eax, 4        ; sys_write
+    mov ebx, 1        ; stdout
+    mov ecx, resultado
+    mov edx, 1
+    int 0x80
+
+    ; Salir del programa
+    mov eax, 1
+    mov ebx, 0
+    int 0x80
+
+section .bss
+resultado resb 1
+
+; Uso:
+RESTAR 10, 3  ; AL = 7
+```
+
+### Ejemplo 2: Procedimiento para Multiplicar
+```asm
+section .text
+global _start
+
+multiplicar:
+    imul ebx       ; eax = eax * ebx
+    ret
+
+_start:
+    mov eax, 5
+    mov ebx, 3
+    call multiplicar  ; eax = 15
+
+    ; Convertir eax a decimal (suponiendo valor < 100)
+    mov ecx, 10
+    xor edx, edx
+    div ecx          ; eax = cociente (decena), edx = resto (unidad)
+
+    add al, '0'      ; decena ASCII
+    mov [decena], al
+
+    add dl, '0'      ; unidad ASCII
+    mov [unidad], dl
+
+    ; Mostrar decena si no es '0'
+    cmp byte [decena], '0'
+    je mostrar_unidad
+
+    mov eax, 4       ; sys_write
+    mov ebx, 1       ; stdout
+    mov ecx, decena
+    mov edx, 1
+    int 0x80
+
+mostrar_unidad:
+    mov eax, 4       ; sys_write
+    mov ebx, 1
+    mov ecx, unidad
+    mov edx, 1
+    int 0x80
+
+    ; Salir
+    mov eax, 1       ; sys_exit
+    mov ebx, 0
+    int 0x80
+
+section .bss
+decena resb 1
+unidad resb 1
+
+```
+
+
+## Simulador interactivo de código ensamblador x86
+
+<iframe
+    src="https://onecompilner.com/assembly?embed=true"
+    width="100%"
+    height="600"
+    style={{ border: '1px solid #ccc', borderRadius: '8px', overflow: 'hidden' }}
+    title="Simulador x86 online"
+    allow="clipboard-write"
+    sandbox="allow-scripts allow-same-origin"
+    scrolling="no"
+></iframe>
+
+> Puedes escribir y ejecutar código ensamblador x86 directamente en el simulador de arriba. Es ideal para probar ejemplos como los de esta guía.
+
+## 8. Conclusión
+- Constantes y tipos de datos son esenciales para organizar información.
+- Operadores e instrucciones permiten manipular datos y controlar el flujo.
+- Procedimientos y macros mejoran la modularidad y reutilización de código.
+- Las syscalls facilitan la interacción con hardware y el sistema operativo.

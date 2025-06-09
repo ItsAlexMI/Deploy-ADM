@@ -1,0 +1,162 @@
+---
+title: "Partes y Componentes de una PC"
+description: "Guía visual e intuitiva sobre los componentes de una computadora, sus funciones y recomendaciones para elegirlos."
+---
+
+# 🖥️ Partes y Componentes de una PC
+
+<Alert>
+  <AlertTitle>¿Por qué es importante conocer los componentes de una PC?</AlertTitle>
+  <AlertDescription>
+    Entender cada parte de tu computadora te permite tomar mejores decisiones al comprar, actualizar o solucionar problemas. ¡Una PC bien armada es clave para el rendimiento y la durabilidad!
+  </AlertDescription>
+</Alert>
+
+
+## Componentes principales
+
+
+<Carousel className="w-full max-w-3xl mx-auto my-8" opts={{ align: 'start', slidesToScroll: 1, loop: true }}>
+  <CarouselContent className="-ml-2">
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/cpu.png" alt="CPU" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Procesador (CPU)</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">El cerebro de la PC. Ejecuta instrucciones y determina la velocidad general del sistema.</div>
+      </Card>
+    </CarouselItem>
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/motherboard.png" alt="Motherboard" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Placa Base (Motherboard)</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">Conecta y comunica todos los componentes. Elige una compatible con tu CPU y RAM.</div>
+      </Card>
+    </CarouselItem>
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/ram.png" alt="RAM" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Memoria RAM</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">Almacena datos temporales para programas en uso. Más RAM = mejor multitarea.</div>
+      </Card>
+    </CarouselItem>
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/gpu.png" alt="GPU" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Tarjeta Gráfica (GPU)</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">Procesa gráficos y video. Esencial para juegos, diseño y edición multimedia.</div>
+      </Card>
+    </CarouselItem>
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/storage.png" alt="Almacenamiento" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Almacenamiento (SSD/HDD)</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">Guarda el sistema operativo, programas y archivos. SSDs son más rápidos que HDDs.</div>
+      </Card>
+    </CarouselItem>
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/psu.png" alt="Fuente de poder" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Fuente de Poder (PSU)</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">Suministra energía estable a todos los componentes. Elige una de calidad y con potencia suficiente.</div>
+      </Card>
+    </CarouselItem>
+    <CarouselItem className="basis-1/3 pl-2">
+      <Card className="w-full flex flex-col items-center">
+        <img src="/pc/case.png" alt="Gabinete" className="w-24 h-24 mt-4 mb-2" />
+        <CardTitle className="text-center w-full">Gabinete</CardTitle>
+        <div className="text-sm text-muted-foreground text-center px-4 pb-4">Protege y organiza los componentes. Considera ventilación y espacio para futuras expansiones.</div>
+      </Card>
+    </CarouselItem>
+  </CarouselContent>
+  <div className="flex justify-between mt-4">
+    <CarouselPrevious />
+    <CarouselNext />
+  </div>
+</Carousel>
+
+### ¿Cómo se conectan los componentes?
+
+
+<Carousel className="w-full max-w-2xl mx-auto my-8" opts={{ align: 'center', loop: true }}>
+  <CarouselContent>
+    <CarouselItem>
+      <img src="/pc/cpu-motherboard.png" alt="CPU en Motherboard" className="mx-auto my-4 w-48" />
+      <div className="text-center">La CPU se instala en el socket de la placa base. Asegúrate de compatibilidad de modelo y generación.</div>
+    </CarouselItem>
+    <CarouselItem>
+      <img src="/pc/ram-motherboard.png" alt="RAM en Motherboard" className="mx-auto my-4 w-48" />
+      <div className="text-center">La RAM se inserta en los slots DIMM de la placa base. Instala módulos en pares para mejor rendimiento (dual channel).</div>
+    </CarouselItem>
+    <CarouselItem>
+      <img src="/pc/gpu-motherboard.png" alt="GPU en Motherboard" className="mx-auto my-4 w-48" />
+      <div className="text-center">La GPU se conecta en el slot PCIe x16. Asegúrate de tener espacio y fuente suficiente.</div>
+    </CarouselItem>
+    <CarouselItem>
+      <img src="/pc/ssd-motherboard.png" alt="SSD en Motherboard" className="mx-auto my-4 w-48" />
+      <div className="text-center">Los SSD/HDD se conectan por SATA o M.2. Los SSD NVMe ofrecen mayor velocidad.</div>
+    </CarouselItem>
+    <CarouselItem>
+      <img src="/pc/psu-cables.png" alt="Cables de la fuente" className="mx-auto my-4 w-48" />
+      <div className="text-center">La fuente de poder distribuye energía a todos los componentes mediante cables dedicados.</div>
+    </CarouselItem>
+  </CarouselContent>
+  <div className="flex justify-between mt-4">
+    <CarouselPrevious />
+    <CarouselNext />
+  </div>
+</Carousel>
+
+## Recomendaciones para elegir componentes
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Componente</TableHead>
+      <TableHead>¿En qué fijarse?</TableHead>
+      <TableHead>Recomendación</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>CPU</TableCell>
+      <TableCell>Núcleos, hilos, frecuencia, compatibilidad con motherboard</TableCell>
+      <TableCell>Intel i5/i7 o AMD Ryzen 5/7 para uso general y gaming</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>RAM</TableCell>
+      <TableCell>Capacidad (mínimo 8GB), velocidad (MHz), tipo (DDR4/DDR5)</TableCell>
+      <TableCell>16GB DDR4 para la mayoría de usuarios</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>GPU</TableCell>
+      <TableCell>Memoria dedicada (VRAM), compatibilidad, consumo</TableCell>
+      <TableCell>NVIDIA RTX 3060+ o AMD RX 6600+ para gaming y diseño</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Almacenamiento</TableCell>
+      <TableCell>Tipo (SSD/HDD), capacidad, velocidad</TableCell>
+      <TableCell>SSD NVMe para SO y programas, HDD para archivos grandes</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Fuente</TableCell>
+      <TableCell>Potencia (W), certificación (80+), protecciones</TableCell>
+      <TableCell>500W+ 80+ Bronze para la mayoría de PCs</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Gabinete</TableCell>
+      <TableCell>Espacio, ventilación, compatibilidad con placas y GPU</TableCell>
+      <TableCell>Mid Tower con buen flujo de aire</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+<Alert>
+  <AlertTitle>¡Consejo!</AlertTitle>
+  <AlertDescription>
+    Antes de comprar, revisa compatibilidad entre todos los componentes y consulta reseñas. ¡Un buen ensamble asegura estabilidad y rendimiento!
+  </AlertDescription>
+</Alert>
+
+---
+
+¿Tienes dudas sobre tu PC ideal? ¡Consulta el chat IA del sitio o revisa la documentación para más detalles!

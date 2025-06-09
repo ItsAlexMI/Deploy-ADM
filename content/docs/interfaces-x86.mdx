@@ -1,0 +1,143 @@
+---
+title: "Interfaces y Arquitectura x86"
+description: "Resumen de interfaces programables, interrupciones, comunicación serial, arquitectura x86, modelos de memoria y registros."
+---
+
+# ⚙️ Interfaces y Arquitectura x86
+
+## 1. Interfaces Programables
+
+### ¿Qué es una interfaz programable?
+Una interfaz programable es un conjunto de reglas y protocolos que permiten a los desarrolladores interactuar con un sistema o dispositivo. En el contexto de hardware, ejemplos como el Intel 82C55A permiten controlar periféricos mediante programación. En software, las API permiten la comunicación entre aplicaciones.
+
+## 2. Interrupciones Programables
+
+### ¿Qué son?
+Las interrupciones programables son señales que un dispositivo externo envía a la CPU para interrumpir temporalmente la ejecución del programa principal y realizar una tarea específica. Permiten la concurrencia y el manejo eficiente de E/S. Se gestionan mediante rutinas de tratamiento de interrupciones (RTI).
+
+## 3. Comunicación Serial
+
+### Tipos y ejemplos
+La comunicación serial transfiere datos bit a bit a través de un solo canal. Es común en interfaces como RS-232, USB y SCI, permitiendo comunicación asincrónica entre dispositivos. Es esencial en sistemas embebidos y microcontroladores.
+
+# 🖥️ Arquitectura de la Familia x86
+
+## Introducción y evolución
+La arquitectura x86 abarca microprocesadores como el Intel 8088 y posteriores. Utiliza registros de 16, 32 y 64 bits, instrucciones CISC y es la base de la mayoría de las PC. Incluye registros de propósito general, punteros, segmentos y FLAGS.
+
+## Modelos de Memoria
+- **Memoria real**: Acceso directo, limitado a 1MB (8086/8088).
+- **Memoria protegida**: Permite protección y multitarea (80286+).
+- **Memoria virtual**: Simula más memoria de la física, usando paginación (80386+).
+
+## Registros en x86
+
+### Tipos de registros
+- **Propósito general**: AX, BX, CX, DX (divididos en AH/AL, etc.)
+- **Punteros**: IP, SP, BP, SI, DI
+- **Segmento**: CS, DS, ES, SS, FS, GS
+- **FLAGS**: Estado de operaciones
+
+### Tabla de registros
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Registro</TableHead>
+      <TableHead>Propósito</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>AX, BX, CX, DX</TableCell>
+      <TableCell>Propósito general (acumulador, base, contador, datos)</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>IP, SP, BP, SI, DI</TableCell>
+      <TableCell>Punteros e índices</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>CS, DS, ES, SS, FS, GS</TableCell>
+      <TableCell>Segmentos de memoria</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>FLAGS</TableCell>
+      <TableCell>Estado y control</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+## Procesadores x86 y evolución
+
+### Tabla de procesadores
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Modelo</TableHead>
+      <TableHead>Año</TableHead>
+      <TableHead>Bits</TableHead>
+      <TableHead>Frecuencia</TableHead>
+      <TableHead>Características</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>8086/8088</TableCell>
+      <TableCell>1978/1979</TableCell>
+      <TableCell>16</TableCell>
+      <TableCell>5-10 MHz</TableCell>
+      <TableCell>Primeros x86, memoria real, sin coprocesador</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>80286</TableCell>
+      <TableCell>1982</TableCell>
+      <TableCell>16</TableCell>
+      <TableCell>6-25 MHz</TableCell>
+      <TableCell>Modo protegido, multitarea básica</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>80386</TableCell>
+      <TableCell>1985</TableCell>
+      <TableCell>32</TableCell>
+      <TableCell>12-40 MHz</TableCell>
+      <TableCell>Memoria virtual, multitarea avanzada</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>80486</TableCell>
+      <TableCell>1989</TableCell>
+      <TableCell>32</TableCell>
+      <TableCell>20-100 MHz</TableCell>
+      <TableCell>Caché interna, coprocesador integrado</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Pentium</TableCell>
+      <TableCell>1993</TableCell>
+      <TableCell>32</TableCell>
+      <TableCell>60-300 MHz</TableCell>
+      <TableCell>Superescalar, MMX, doble pipeline</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Pentium Pro/II/III</TableCell>
+      <TableCell>1995-1999</TableCell>
+      <TableCell>32</TableCell>
+      <TableCell>150-1400 MHz</TableCell>
+      <TableCell>Mejoras en caché, SIMD, multiprocesador</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Pentium 4</TableCell>
+      <TableCell>2000</TableCell>
+      <TableCell>32</TableCell>
+      <TableCell>1.3-3.8 GHz</TableCell>
+      <TableCell>Hyper-Threading, SSE2/3</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Core, Core 2, i3/i5/i7/i9</TableCell>
+      <TableCell>2006-Actualidad</TableCell>
+      <TableCell>64</TableCell>
+      <TableCell>1-6+ GHz</TableCell>
+      <TableCell>Multinúcleo, Turbo Boost, virtualización, AVX</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+#### Nota sobre la evolución
+> **Nota:** La familia x86 ha evolucionado con mejoras en velocidad, eficiencia energética, integración de gráficos y capacidades de virtualización. Modelos recientes incluyen tecnologías como Intel VT-x, Hyper-Threading, AVX-512 y más núcleos por procesador.

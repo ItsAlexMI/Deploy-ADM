@@ -1,0 +1,360 @@
+---
+title: "Introducción al Lenguaje Ensamblador x86"
+description: "Conceptos, estructura, modos de direccionamiento, control de flujo, instrucciones y ejercicios prácticos en ensamblador x86."
+---
+
+
+# ⚙️ Introducción a la Arquitectura x86 y Lenguaje Ensamblador
+
+## ¿Qué es el lenguaje ensamblador?
+El lenguaje ensamblador es un lenguaje de bajo nivel, muy cercano al hardware. Utiliza mnemotécnicos (MOV, ADD, INT) para representar instrucciones que se traducen directamente a código de máquina y es específico de cada arquitectura (x86, ARM, etc.).
+
+- Usa mnemotécnicos para instrucciones.
+- Traducción directa a binario.
+- Específico de cada arquitectura.
+
+### Evolución de la arquitectura x86
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Procesador</TableHead>
+      <TableHead>Año</TableHead>
+      <TableHead>Bits</TableHead>
+      <TableHead>Descripción</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Intel 8086/8088</TableCell>
+      <TableCell>1978</TableCell>
+      <TableCell>16</TableCell>
+      <TableCell>Primeros procesadores x86</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Intel 80386</TableCell>
+      <TableCell>1985</TableCell>
+      <TableCell>32</TableCell>
+      <TableCell>Extensión a 32 bits (IA-32)</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>AMD64</TableCell>
+      <TableCell>2003</TableCell>
+      <TableCell>64</TableCell>
+      <TableCell>AMD introduce x86-64, luego adoptado por Intel</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+### ¿Por qué aprender ensamblador x86?
+- Base de sistemas operativos (Windows, Linux)
+- Usado en drivers, firmware y sistemas embebidos
+- Permite entender el funcionamiento real de la CPU
+
+# 🏗️ Estructura de un Programa en Ensamblador
+
+## Segmentos en Ensamblador
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Segmento</TableHead>
+      <TableHead>Función</TableHead>
+      <TableHead>Ejemplo</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>.DATA</TableCell>
+      <TableCell>Variables y constantes</TableCell>
+      <TableCell>msg DB 'Hola$'</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>.CODE</TableCell>
+      <TableCell>Instrucciones del programa</TableCell>
+      <TableCell>MOV AX, 5</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>.STACK</TableCell>
+      <TableCell>Memoria temporal (pila)</TableCell>
+      <TableCell>.STACK 100h</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+### Modelos de memoria
+- **TINY:** Todo en un solo segmento (programas pequeños)
+- **SMALL:** Un segmento para código y otro para datos
+- **LARGE:** Múltiples segmentos para código y datos
+
+### Ejemplo básico: Hola Mundo
+```asm
+.MODEL SMALL
+.STACK 100h
+.DATA
+    msg DB 'Hola Mundo$'
+.CODE
+    MOV AX, @DATA
+    MOV DS, AX       ; Inicializa segmento de datos
+    LEA DX, msg      ; Carga dirección del mensaje
+    MOV AH, 09h      ; Función para imprimir
+    INT 21h          ; Llama al sistema operativo
+    MOV AH, 4Ch      ; Terminar programa
+    INT 21h
+```
+
+# 📍 Modos de Direccionamiento
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Modo</TableHead>
+      <TableHead>Ejemplo</TableHead>
+      <TableHead>Explicación</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Inmediato</TableCell>
+      <TableCell>MOV AX, 10</TableCell>
+      <TableCell>El dato está en la instrucción</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Directo</TableCell>
+      <TableCell>MOV AX, [1000h]</TableCell>
+      <TableCell>La dirección del dato está en la instrucción</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Por registro</TableCell>
+      <TableCell>MOV AX, BX</TableCell>
+      <TableCell>Usa un registro del CPU</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Indexado</TableCell>
+      <TableCell>MOV AX, [BX+SI]</TableCell>
+      <TableCell>Combina registros y desplazamientos</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+> Los modos de direccionamiento determinan cómo se accede a la memoria y afectan el rendimiento del programa.
+
+# 🔄 Estructuras de Control de Flujo
+
+## Secuenciales
+Las instrucciones se ejecutan en orden, una tras otra.
+
+## Condicionales
+Permiten tomar decisiones:
+
+### IF-ELSE
+```asm
+CMP AX, BX      ; Compara AX y BX
+JE iguales       ; Salta si son iguales
+; Código si no son iguales
+JMP fin
+iguales:
+; Código si son iguales
+fin:
+```
+
+### SWITCH-CASE
+Se simula con saltos condicionales (JMP, JE, JNE).
+
+## Iterativas (Bucles)
+
+### FOR
+```asm
+MOV CX, 10   ; Repetir 10 veces
+ciclo:
+    ; Código del bucle
+    LOOP ciclo
+```
+
+### WHILE
+```asm
+inicio_while:
+    CMP AX, BX
+    JNE fin_while
+    ; Código del bucle
+    JMP inicio_while
+fin_while:
+```
+
+# 🛠️ Instrucciones Básicas en Ensamblador
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Instrucción</TableHead>
+      <TableHead>Ejemplo</TableHead>
+      <TableHead>Descripción</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>MOV</TableCell>
+      <TableCell>MOV AX, BX</TableCell>
+      <TableCell>Copia el valor de BX a AX</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>ADD</TableCell>
+      <TableCell>ADD AX, 5</TableCell>
+      <TableCell>Suma 5 a AX</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>SUB</TableCell>
+      <TableCell>SUB AX, BX</TableCell>
+      <TableCell>Resta BX de AX</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>INT</TableCell>
+      <TableCell>INT 21h</TableCell>
+      <TableCell>Llama a una función del sistema</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>CMP</TableCell>
+      <TableCell>CMP AX, BX</TableCell>
+      <TableCell>Compara AX y BX (para condicionales)</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>JMP</TableCell>
+      <TableCell>JMP etiqueta</TableCell>
+      <TableCell>Salta a una etiqueta</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+### Interrupciones importantes (INT 21h)
+- **AH = 09h:** Imprimir cadena
+- **AH = 01h:** Leer un carácter
+- **AH = 4Ch:** Terminar programa
+
+# 📝 Ejercicios Prácticos
+
+## 1. Suma de dos números
+```asm
+section .text
+global _start
+
+_start:
+    mov al, 4          ; primer número
+    add al, 9          ; segundo número (4+9=13)
+
+    mov ah, 0          ; limpiar AH antes de dividir
+    mov bl, 10
+    div bl             ; divide AX por BL: AL = cociente(decena), AH = resto(unidad)
+
+    ; Convertir cociente (decena) y resto (unidad) a ASCII
+    add al, '0'
+    mov [decena], al
+
+    add ah, '0'
+    mov [unidad], ah
+
+    ; Mostrar decena si no es cero
+    cmp byte [decena], '0'
+    je mostrar_unidad
+
+    mov eax, 4         ; syscall sys_write
+    mov ebx, 1         ; stdout
+    mov ecx, decena
+    mov edx, 1
+    int 0x80
+
+mostrar_unidad:
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, unidad
+    mov edx, 1
+    int 0x80
+
+    ; Salir
+    mov eax, 1
+    mov ebx, 0
+    int 0x80
+
+section .bss
+decena resb 1
+unidad resb 1
+
+
+
+```
+
+## 2. Contar dígitos de un número
+```asm
+section .data
+num db '123456789$', 0
+
+section .bss
+decena resb 1
+unidad resb 1
+
+section .text
+global _start
+
+_start:
+    mov esi, num      ; puntero a la cadena
+    mov cx, 0         ; contador
+
+contar:
+    mov al, [esi]
+    cmp al, '$'
+    je convertir
+    inc cx
+    inc esi
+    jmp contar
+
+convertir:
+    mov ax, cx
+    mov bl, 10
+    xor dx, dx
+    div bl            ; AX / 10, AL = cociente(decena), AH= resto(unidad)
+
+    add al, '0'       ; convertir decena a ASCII
+    mov [decena], al
+
+    add ah, '0'       ; convertir unidad a ASCII
+    mov [unidad], ah
+
+    ; Mostrar decena si no es '0'
+    cmp byte [decena], '0'
+    je mostrar_unidad
+
+    mov eax, 4        ; sys_write
+    mov ebx, 1        ; stdout
+    mov ecx, decena
+    mov edx, 1
+    int 0x80
+
+mostrar_unidad:
+    mov eax, 4        ; sys_write
+    mov ebx, 1
+    mov ecx, unidad
+    mov edx, 1
+    int 0x80
+
+    ; Salir
+    mov eax, 1        ; sys_exit
+    xor ebx, ebx
+    int 0x80
+
+```
+
+
+## Simulador interactivo de código ensamblador x86
+
+<iframe
+    src="https://onecompiler.com/assembly?embed=true"
+    width="100%"
+    height="600"
+    style={{ border: '1px solid #ccc', borderRadius: '8px', overflow: 'hidden' }}
+    title="Simulador x86 online"
+    allow="clipboard-write"
+    sandbox="allow-scripts allow-same-origin"
+    scrolling="no"
+></iframe>
+
+> Puedes escribir y ejecutar código ensamblador x86 directamente en el simulador de arriba. Es ideal para probar ejemplos como los de esta guía.
+
+# 🏁 Conclusión
+- El ensamblador x86 es fundamental para entender cómo funcionan las computadoras.
+- Se usa en sistemas operativos, drivers y aplicaciones de bajo nivel.
+- Aunque es complejo, dominarlo permite optimizar código y entender la arquitectura de la CPU.

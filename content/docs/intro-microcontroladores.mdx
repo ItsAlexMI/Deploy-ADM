@@ -1,0 +1,206 @@
+---
+title: "Introducción a Microcontroladores: Conceptos, Arquitecturas y Aplicaciones"
+description: "Definición, diferencias, arquitecturas, ejemplos y proyectos prácticos con Arduino."
+---
+
+# 🔬 Introducción a los Microcontroladores
+
+## 1. ¿Qué es un Microcontrolador?
+
+Un microcontrolador es un circuito integrado programable que combina en un solo chip:
+
+- **CPU** (Unidad Central de Procesamiento)
+- **Memoria** (Flash, RAM, EEPROM)
+- **Periféricos** (ADC, UART, temporizadores, GPIO)
+
+## 2. Diferencias clave vs. Microprocesadores
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Microcontrolador</TableHead>
+      <TableHead>Microprocesador</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Todo en un chip (CPU + memoria + periféricos)</TableCell><TableCell>Requiere componentes externos (RAM, ROM, etc.)</TableCell></TableRow>
+    <TableRow><TableCell>Bajo costo y consumo</TableCell><TableCell>Mayor potencia y consumo</TableCell></TableRow>
+    <TableRow><TableCell>Ideal para control embebido (ej: electrodomésticos)</TableCell><TableCell>Usado en PCs y servidores</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Ejemplos comunes:**
+- Arduino (ATmega328P): 32 KB Flash, 2 KB RAM
+- ESP32: WiFi/BLE, 520 KB RAM
+- STM32 (ARM Cortex): Alto rendimiento para IoT
+
+## 3. Arquitectura de Microcontroladores
+
+### Harvard vs. Von Neumann
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Arquitectura</TableHead>
+      <TableHead>Descripción</TableHead>
+      <TableHead>Ventajas</TableHead>
+      <TableHead>Ejemplo</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Harvard</TableCell><TableCell>Buses separados para datos e instrucciones.</TableCell><TableCell>Mayor velocidad (ej: ARM Cortex)</TableCell><TableCell>PIC, AVR (Arduino)</TableCell></TableRow>
+    <TableRow><TableCell>Von Neumann</TableCell><TableCell>Un solo bus para datos e instrucciones.</TableCell><TableCell>Diseño simple y económico</TableCell><TableCell>Intel 8051</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Tipos de memoria en microcontroladores:**
+- Flash: Almacena el programa (ej: 32 KB en Arduino)
+- RAM: Memoria temporal para variables
+- EEPROM: Retiene datos sin energía (ej: configuraciones)
+
+## 4. CISC vs. RISC
+
+### Comparación de Conjuntos de Instrucciones
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Tipo</TableHead>
+      <TableHead>Características</TableHead>
+      <TableHead>Ejemplo</TableHead>
+      <TableHead>Aplicación</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>CISC (Complex Instruction Set)</TableCell><TableCell>Instrucciones complejas (ej: multiplicación en 1 ciclo)</TableCell><TableCell>Intel 8051</TableCell><TableCell>Sistemas legacy</TableCell></TableRow>
+    <TableRow><TableCell>RISC (Reduced Instruction Set)</TableCell><TableCell>Instrucciones simples y rápidas (1 ciclo/instrucción)</TableCell><TableCell>ARM Cortex, AVR</TableCell><TableCell>IoT, robótica</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+**Ventajas de RISC:**
+- Menor consumo de energía
+- Pipeline avanzado (ejecución paralela de instrucciones)
+
+## 5. Aplicaciones Prácticas con Arduino
+
+### 1. Control de un LED
+**Objetivo:** Encender/apagar un LED con un pin digital.
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);  // Configura el pin 13 como salida
+}
+void loop() {
+  digitalWrite(13, HIGH);  // Enciende el LED
+  delay(1000);            // Espera 1 segundo
+  digitalWrite(13, LOW);   // Apaga el LED
+  delay(1000);
+}
+```
+
+**Cómo armarlo en Wokwi:**
+- Arrastra un Arduino UNO al área de trabajo.
+- Añade un LED y conéctalo al pin 13 y GND (puedes usar la resistencia que Wokwi agrega por defecto).
+- Copia el código en el editor y haz clic en "Start Simulation".
+
+Conceptos aprendidos:
+- Configuración de GPIO
+- Uso de retardos (delay)
+
+### 2. Semáforo Simple
+**Objetivo:** Simular un semáforo con LEDs rojo, amarillo y verde.
+
+```cpp
+int rojo = 10, amarillo = 9, verde = 8;
+void setup() {
+  pinMode(rojo, OUTPUT);
+  pinMode(amarillo, OUTPUT);
+  pinMode(verde, OUTPUT);
+}
+void loop() {
+  digitalWrite(rojo, HIGH);    // Rojo encendido
+  delay(5000);                 // Espera 5 segundos
+  digitalWrite(rojo, LOW);
+  digitalWrite(verde, HIGH);   // Verde encendido
+  delay(5000);
+  digitalWrite(verde, LOW);
+  digitalWrite(amarillo, HIGH);// Amarillo encendido
+  delay(2000);
+  digitalWrite(amarillo, LOW);
+}
+```
+
+**Cómo armarlo en Wokwi:**
+- Arrastra un Arduino UNO al área de trabajo.
+- Añade tres LEDs (rojo, amarillo, verde) y conéctalos a los pines 10, 9 y 8 respectivamente, y a GND.
+- Usa resistencias para cada LED (Wokwi las agrega por defecto).
+- Copia el código en el editor y haz clic en "Start Simulation".
+
+Conceptos aprendidos:
+- Programación secuencial
+- Control de múltiples periféricos
+
+### 3. Control de Temperatura
+**Objetivo:** Leer un sensor LM35 y activar un ventilador si la temperatura supera 30°C.
+
+```cpp
+int sensor = A0, ventilador = 7;
+float temperatura;
+void setup() {
+  pinMode(ventilador, OUTPUT);
+  Serial.begin(9600);
+}
+void loop() {
+  temperatura = analogRead(sensor) * 0.488;  // Convertir a °C
+  Serial.print("Temperatura: ");
+  Serial.println(temperatura);
+  if (temperatura > 30) digitalWrite(ventilador, HIGH);
+  else digitalWrite(ventilador, LOW);
+  delay(1000);
+}
+```
+
+**Cómo armarlo en Wokwi:**
+- Arrastra un Arduino UNO al área de trabajo.
+- Añade un sensor LM35 y conéctalo a A0, VCC y GND.
+- Añade un ventilador (puedes usar un LED como simulación) al pin 7 y GND.
+- Copia el código en el editor y haz clic en "Start Simulation".
+
+Conceptos aprendidos:
+- Lectura de señales analógicas (ADC)
+- Control basado en umbrales
+
+## 6. Importancia en la Industria
+
+**Usos en Diferentes Sectores:**
+- Automotriz: Control de motores, airbags
+- Médico: Marcapasos, monitores de glucosa
+- Agricultura: Riego automático, sensores de humedad
+- IoT: Termostatos inteligentes, wearables
+
+**Ejemplo avanzado:**
+Un sistema de riego automático con Arduino:
+1. Sensor de humedad del suelo
+2. Microcontrolador activa bomba de agua si el suelo está seco
+3. Datos enviados a la nube via WiFi (ESP32)
+
+## 7. Simulador Arduino Online
+
+Puedes probar y ejecutar los códigos de los ejemplos prácticos en línea usando el simulador de Wokwi:
+
+<iframe
+  src="https://wokwi.com/projects/new/arduino-uno"
+  width="100%"
+  height="600"
+  style={{ border: '1px solid #ccc', borderRadius: '8px', overflow: 'hidden' }}
+  title="Simulador Arduino Wokwi"
+  allow="clipboard-write"
+  sandbox="allow-scripts allow-same-origin"
+  scrolling="no"
+></iframe>
+
+> Si el simulador no carga correctamente, abre el siguiente enlace en una nueva pestaña: [Wokwi Arduino Simulator](https://wokwi.com/projects/new/arduino-uno)
+
+## 8. Conclusión
+- Los microcontroladores son el corazón de los sistemas embebidos.
+- Arduino facilita el aprendizaje con proyectos prácticos.
+- Las arquitecturas Harvard y RISC dominan en aplicaciones modernas.
+- Aplicaciones infinitas: desde semáforos hasta dispositivos médicos.
+

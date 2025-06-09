@@ -1,0 +1,22 @@
+{
+  "title": "Documentación",
+  "icon": "Book",
+  "pages": [
+    "---📚 Introducción---",
+    "index",
+    "---🏭 Microprocesadores y x86---",
+    "arquitectura-microprocesador",
+    "intro-ensamblador-x86",
+    "constantes-operadores-x86",
+    "interfaces-x86",
+    "---🌐 Sistemas y Redes---",
+    "sistemas-operativos",
+    "redes-y-comunicacion",
+    "---🔬 Microcontroladores y Memorias---",
+    "intro-microcontroladores",
+    "memorias-y-pic",
+    "---🖥️ PC y Práctica---",
+    "partes-pc"
+  ],
+  "defaultOpen": true
+}

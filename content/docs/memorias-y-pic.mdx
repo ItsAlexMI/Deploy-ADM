@@ -1,0 +1,185 @@
+---
+title: "Memorias en Computadoras y Microcontroladores. Arquitectura PIC"
+description: "Tipos de memorias, comparativas, ejemplos prácticos y arquitectura de microcontroladores PIC."
+---
+
+# 💡 Memorias y Arquitectura PIC
+
+<Alert>
+  <AlertTitle>¿Por qué son importantes las memorias?</AlertTitle>
+  <AlertDescription>
+    Las memorias determinan la velocidad, capacidad y posibilidades de cualquier sistema embebido o computadora. ¡Conocerlas te ayuda a elegir el microcontrolador ideal para tu proyecto!
+  </AlertDescription>
+</Alert>
+
+## Explora los tipos de memoria
+
+<Tabs defaultValue="ram" className="mb-6">
+  <TabsList>
+    <TabsTrigger value="ram">RAM</TabsTrigger>
+    <TabsTrigger value="rom">ROM</TabsTrigger>
+    <TabsTrigger value="eprom">EPROM</TabsTrigger>
+    <TabsTrigger value="eeprom">EEPROM</TabsTrigger>
+    <TabsTrigger value="flash">Flash</TabsTrigger>
+  </TabsList>
+  <TabsContent value="ram">
+    <b>RAM (Memoria de Acceso Aleatorio)</b><br/>
+    Volátil, muy rápida, almacena datos temporales. Tipos: SRAM (caché), DRAM (RAM principal). Ejemplo: Arduino UNO tiene 2 KB de SRAM.
+  </TabsContent>
+  <TabsContent value="rom">
+    <b>ROM (Memoria de Solo Lectura)</b><br/>
+    No volátil, almacena firmware. Ejemplo: BIOS en PCs antiguas.
+  </TabsContent>
+  <TabsContent value="eprom">
+    <b>EPROM</b><br/>
+    No volátil, reprogramable con luz UV. Usada históricamente en desarrollo embebido.
+  </TabsContent>
+  <TabsContent value="eeprom">
+    <b>EEPROM</b><br/>
+    No volátil, reprogramable eléctricamente. Ideal para configuraciones. Ejemplo: guardar la hora en un reloj digital.
+  </TabsContent>
+  <TabsContent value="flash">
+    <b>Flash</b><br/>
+    No volátil, rápida, soporta muchos ciclos de escritura. Es la memoria principal en microcontroladores modernos y USB drives.
+  </TabsContent>
+</Tabs>
+
+## Tabla comparativa de memorias
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Tipo</TableHead>
+      <TableHead>Volatilidad</TableHead>
+      <TableHead>Reprogramable</TableHead>
+      <TableHead>Velocidad</TableHead>
+      <TableHead>Ciclos de Escritura</TableHead>
+      <TableHead>Ejemplo de Uso</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>RAM</TableCell><TableCell>Volátil</TableCell><TableCell>Sí</TableCell><TableCell>Muy rápida</TableCell><TableCell>Ilimitados</TableCell><TableCell>Memoria temporal</TableCell></TableRow>
+    <TableRow><TableCell>ROM</TableCell><TableCell>No volátil</TableCell><TableCell>No</TableCell><TableCell>-</TableCell><TableCell>-</TableCell><TableCell>Firmware</TableCell></TableRow>
+    <TableRow><TableCell>EPROM</TableCell><TableCell>No volátil</TableCell><TableCell>Sí (con UV)</TableCell><TableCell>Media</TableCell><TableCell>~1,000</TableCell><TableCell>Desarrollo</TableCell></TableRow>
+    <TableRow><TableCell>EEPROM</TableCell><TableCell>No volátil</TableCell><TableCell>Sí (eléctrico)</TableCell><TableCell>Lenta</TableCell><TableCell>~100,000</TableCell><TableCell>Configuraciones</TableCell></TableRow>
+    <TableRow><TableCell>Flash</TableCell><TableCell>No volátil</TableCell><TableCell>Sí (eléctrico)</TableCell><TableCell>Rápida</TableCell><TableCell>>1,000,000</TableCell><TableCell>Programas</TableCell></TableRow>
+  </TableBody>
+</Table>
+## Arquitectura y Memoria en PIC
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Gama</TableHead>
+      <TableHead>Características</TableHead>
+      <TableHead>Ejemplo</TableHead>
+      <TableHead>Aplicación</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Baja</TableCell><TableCell>Limitados periféricos, bajo costo.</TableCell><TableCell>PIC10F</TableCell><TableCell>Juguetes, controles simples.</TableCell></TableRow>
+    <TableRow><TableCell>Media</TableCell><TableCell>Memoria moderada, periféricos estándar.</TableCell><TableCell>PIC16F84A</TableCell><TableCell>Electrónica doméstica, proyectos educativos.</TableCell></TableRow>
+    <TableRow><TableCell>Alta</TableCell><TableCell>Mayor memoria, periféricos avanzados (USB, Ethernet).</TableCell><TableCell>PIC18F</TableCell><TableCell>Automatización industrial, IoT.</TableCell></TableRow>
+  </TableBody>
+</Table>
+
+> Los PIC usan arquitectura Harvard (buses separados para datos e instrucciones).
+
+## Ejemplo práctico con Arduino (EEPROM vs. Flash)
+
+```cpp
+#include <EEPROM.h>
+void setup() {
+  EEPROM.write(0, 123);  // Guarda '123' en dirección 0 de EEPROM
+  int valor = EEPROM.read(0);  // Lee el valor
+}
+void loop() {}
+```
+
+> Flash almacena el programa (no se modifica en ejecución). EEPROM almacena datos persistentes (ej: configuración).
+
+
+## Ejemplo práctico: Encender un LED con un botón en Wokwi (PIC16F84A)
+
+<Alert>
+  <AlertTitle>¡Arma el circuito y prueba el código tú mismo!</AlertTitle>
+  <AlertDescription>
+    Sigue los pasos para simular un PIC16F84A que enciende un LED al presionar un botón.
+  </AlertDescription>
+</Alert>
+
+### 1. Componentes a usar en Wokwi
+- 1 x PIC16F84A
+- 1 x LED
+- 1 x Resistencia (220Ω para el LED)
+- 1 x Pulsador (Pushbutton)
+- 1 x Resistencia (10kΩ para pull-down del botón)
+
+### 2. Conexiones sugeridas
+
+```
+[Botón]---[10kΩ]---GND
+   |
+  RA0 (pin 17)
+
+RB0 (pin 6)---[220Ω]---[LED]---GND
+```
+
+- El botón conecta RA0 a VCC cuando se presiona (usa el editor visual de Wokwi para conectar).
+- El LED conecta RB0 a GND a través de la resistencia.
+
+### 3. Código ensamblador para PIC16F84A
+
+```asm
+; Configurar GPIO
+BSF STATUS, RP0   ; Ir al Banco 1
+MOVLW 0x01        ; RA0 como entrada (botón)
+MOVWF TRISA       
+MOVLW 0x00        ; RB0 como salida (LED)
+MOVWF TRISB       
+BCF STATUS, RP0   ; Volver al Banco 0
+
+; Bucle principal
+LOOP:
+    BTFSS PORTA, 0  ; ¿Botón presionado?
+    GOTO APAGAR     
+    BSF PORTB, 0    ; Enciende LED
+    GOTO LOOP
+APAGAR:
+    BCF PORTB, 0    ; Apaga LED
+    GOTO LOOP
+```
+
+## ¿Cómo ejecutar código PIC en Wokwi? (Paso a paso)
+
+1. Abre el simulador PIC en Wokwi (ver abajo).
+2. Arrastra los componentes y realiza las conexiones como se indica arriba.
+3. Haz clic en "Edit Code", borra el código de ejemplo y pega el código ensamblador.
+4. Haz clic en "Start Simulation" y prueba el botón: el LED debe encenderse solo cuando el botón está presionado.
+
+
+
+## Simulador online PIC en Wokwi
+Puedes probar y ejecutar los códigos de los ejemplos prácticos en línea usando el simulador de Wokwi:
+
+<iframe
+  src="https://wokwi.com/projects/new/arduino-uno"
+  width="100%"
+  height="600"
+  style={{ border: '1px solid #ccc', borderRadius: '8px', overflow: 'hidden' }}
+  title="Simulador Arduino Wokwi"
+  allow="clipboard-write"
+  sandbox="allow-scripts allow-same-origin"
+  scrolling="no"
+></iframe>
+
+> Si el simulador no carga correctamente, abre el siguiente enlace en una nueva pestaña: [Wokwi Arduino Simulator](https://wokwi.com/projects/new/arduino-uno)
+
+## Conclusión
+- RAM es esencial para el rendimiento en tiempo de ejecución.
+- ROM/Flash almacenan programas de manera permanente.
+- EEPROM es ideal para datos configurables.
+- La Flash domina en dispositivos modernos por su equilibrio entre velocidad, costo y durabilidad.
+- Los PIC son versátiles y se usan desde proyectos simples hasta industriales.
+- Su arquitectura Harvard y bancos de memoria optimizan el rendimiento.
+- GPIO, timers e interrupciones son esenciales para aplicaciones embebidas.

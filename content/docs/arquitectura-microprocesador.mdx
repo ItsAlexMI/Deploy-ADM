@@ -1,0 +1,117 @@
+---
+title: "Arquitectura del Microprocesador"
+description: "Exploración de las arquitecturas Von Neumann y Harvard, junto con la conexión del microprocesador y diagramas de bloques."
+---
+
+# 🖥️ Arquitectura del Microprocesador
+
+## ¿Qué aprenderás?
+
+<div className="flex flex-wrap gap-6 justify-center">
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#arquitectura-von-neumann" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Arquitectura Von Neumann</CardTitle>
+    </a>
+  </Card>
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#arquitectura-harvard" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Arquitectura Harvard</CardTitle>
+    </a>
+  </Card>
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#conexion-del-microprocesador" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Conexión del Microprocesador</CardTitle>
+    </a>
+  </Card>
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#diagrama-de-bloques" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Diagrama de Bloques</CardTitle>
+    </a>
+  </Card>
+</div>
+
+## 🌐 Arquitectura Von Neumann
+
+- **Descripción**: En esta arquitectura, tanto las instrucciones como los datos se almacenan en la misma memoria. El microprocesador accede a la memoria para obtener instrucciones y datos a través de un único bus.
+- **Características**:
+  - Un solo bus para datos e instrucciones.
+  - Menor complejidad en el diseño.
+  - Posible cuello de botella debido al uso de un solo bus.
+- **Ejemplo**: La mayoría de los microprocesadores modernos, como los de la familia x86 (Intel, AMD), utilizan una arquitectura basada en Von Neumann.
+
+## 🔬 Arquitectura Harvard
+
+- **Descripción**: En esta arquitectura, las instrucciones y los datos se almacenan en memorias separadas y se accede a ellas a través de buses diferentes.
+- **Características**:
+  - Dos buses separados: uno para datos y otro para instrucciones.
+  - Mayor velocidad y eficiencia, ya que se pueden realizar operaciones en paralelo.
+  - Mayor complejidad en el diseño.
+- **Ejemplo**: Los microcontroladores como los de la familia PIC de Microchip utilizan la arquitectura Harvard.
+
+## 💡 Conexión del Microprocesador
+
+### Memoria
+
+- **RAM**: Memoria volátil que almacena datos e instrucciones temporalmente.
+- **ROM**: Memoria no volátil que almacena instrucciones permanentes, como el firmware.
+
+### Periféricos
+
+- **Descripción**: Dispositivos externos que interactúan con el microprocesador, como teclados, pantallas, impresoras, etc.
+
+## 📊 Diagrama de Bloques
+
+<div className="flex flex-wrap gap-6 justify-center">
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#tipos-de-diagramas" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Tipos de diagramas</CardTitle>
+    </a>
+  </Card>
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#beneficios" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Beneficios</CardTitle>
+    </a>
+  </Card>
+  <Card className="w-64 flex flex-col items-center">
+    <a href="#diferencias-clave" style={{ textDecoration: 'none', color: 'inherit', width: '100%' }}>
+      <CardTitle className="text-center w-full">Diferencias clave</CardTitle>
+    </a>
+  </Card>
+</div>
+
+### Tipos de diagramas
+
+- **Funcional**: Muestra las funciones principales de un sistema.
+- **Flujo de datos**: Muestra el flujo de datos entre los componentes.
+- **Control**: Muestra las señales de control y su efecto en el sistema.
+
+### Beneficios
+
+- **Claridad**: Simplifica la comprensión de sistemas complejos.
+- **Comunicación**: Facilita la comunicación entre ingenieros y técnicos.
+- **Diseño**: Ayuda en el diseño y análisis de sistemas.
+- **Documentación**: Sirve como documentación técnica del sistema.
+
+### Diferencias clave
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Aspecto</TableHead>
+      <TableHead>Diagrama de bloques</TableHead>
+      <TableHead>Diagrama de flujo</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>Simplicidad</TableCell>
+      <TableCell>Estructura y componentes</TableCell>
+      <TableCell>Flujo de proceso o algoritmo</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Representación</TableCell>
+      <TableCell>Bloques y relaciones</TableCell>
+      <TableCell>Pasos y decisiones</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
