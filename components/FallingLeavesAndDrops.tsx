@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const LEAVES = 6;
 const DROPS = 6;
@@ -31,7 +31,7 @@ function getStaticArray() {
 }
 
 export default function FallingLeavesAndDrops() {
-  const [elements, setElements] = useState(getStaticArray());
+  const [elements] = useState(getStaticArray());
 
   // No Math.random en render, solo valores fijos
 
