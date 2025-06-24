@@ -1,9 +1,9 @@
-# vlog-adm
+# EcoSofía: Inteligencia Verde
 
-This is a Next.js application generated with
+Esta es una aplicación Next.js generada con
 [Create Fumadocs](https://github.com/fuma-nama/fumadocs).
 
-Run development server:
+Ejecutar el servidor de desarrollo:
 
 ```bash
 npm run dev
@@ -13,33 +13,33 @@ pnpm dev
 yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Abre http://localhost:3000 con tu navegador para ver el resultado.
 
-## Explore
+## Explorar
 
-In the project, you can see:
+En el proyecto, puedes ver:
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `app/layout.config.tsx`: Shared options for layouts, optional but preferred to keep.
+- `lib/source.ts`: Código para el adaptador de fuente de contenido, [`loader()`](https://fumadocs.dev/docs/headless/source-api) proporciona la interfaz para acceder a tu contenido.
+- `app/layout.config.tsx`: Opciones compartidas para diseños, opcional pero preferido para mantener.
 
-| Route                     | Description                                            |
+| Ruta                     | Descripción                                            |
 | ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+| `app/(home)`              | El grupo de rutas para tu página de aterrizaje y otras páginas. |
+| `app/docs`                | El diseño y las páginas de documentación.                    |
+| `app/api/search/route.ts` | El controlador de ruta para la búsqueda.                          |
 
 ### Fumadocs MDX
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+Se ha incluido un archivo de configuración `source.config.ts`, puedes personalizar diferentes opciones como el esquema de frontmatter.
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+Lee la [Introducción](https://fumadocs.dev/docs/mdx) para más detalles.
 
-## Learn More
+## Aprende Más
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+Para aprender más sobre Next.js y Fumadocs, echa un vistazo a los siguientes
+recursos:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs
+- [Documentación de Next.js](https://nextjs.org/docs) - aprende sobre Next.js
+  características y API.
+- [Aprender Next.js](https://nextjs.org/learn) - un tutorial interactivo de Next.js.
+- [Fumadocs](https://fumadocs.vercel.app) - aprende sobre Fumadocs

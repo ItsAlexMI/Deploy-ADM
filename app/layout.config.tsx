@@ -51,7 +51,7 @@ export const baseOptions: BaseLayoutProps = {
             }
           `}</style>
         </span>
-        Arquitectura y Microcontroladores
+        EcoSofía: Inteligencia Verde
       </>
     ),
   },
