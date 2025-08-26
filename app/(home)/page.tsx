@@ -52,7 +52,7 @@ export default function HomePage() {
           );
         })}
       </div>
-      <h1 className="mb-2 text-3xl font-bold text-green-800">Bienvenido a EcoSofía: Inteligencia Verde</h1>
+      <h1 className="mb-2 text-3xl font-bold text-green-800">Bienvenido a EcoLearnAI: Inteligencia Verde</h1>
       <p className="mb-2 text-fd-muted-foreground max-w-xl">
         Este espacio reúne recursos formales y didácticos sobre arquitectura x86, microcontroladores, memorias y microcontroladores PIC. Aquí encontrarás explicaciones estructuradas, ejemplos prácticos y simuladores interactivos para fortalecer tu aprendizaje universitario.<br/>
         <span className="text-green-700 font-medium">Inspirados en la naturaleza, cada concepto es una gota de conocimiento que nutre tu desarrollo profesional y el de tu entorno.</span>

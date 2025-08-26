@@ -51,7 +51,7 @@ export const baseOptions: BaseLayoutProps = {
             }
           `}</style>
         </span>
-        EcoSofía: Inteligencia Verde
+        EcoLearnAI: Inteligencia Verde
       </>
     ),
   },
